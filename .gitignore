@@ -1,4 +1,4 @@
-node_modules/**
+be/node_modules/**
 *.iml
-.idea/**
+.idea/*
 ui/libs/**
