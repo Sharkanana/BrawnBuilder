@@ -1,4 +1,4 @@
 
 module.exports = {
-    url: 'mongodb://localhost/stencil-dev'
+    url: 'mongodb://localhost/brawnbuilder'
 };
