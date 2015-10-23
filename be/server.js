@@ -40,8 +40,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 // set the static files location /public/img will be /img for users
-app.use(express.static(__dirname + '/ui'));
-app.set('views', __dirname + '/ui/views');
+app.use(express.static(__dirname + '/public'));
+app.use('/public', express.static(__dirname + '/public'));
+app.set('views', __dirname + '/public/views');
 
 // log requests
 app.use(morgan('dev'));
