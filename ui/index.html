@@ -9,7 +9,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="public/libs/bootstrap/dist/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="css/style.css"> &lt;!&ndash; custom styles &ndash;&gt;-->
+    <link rel="stylesheet" href="public/css/bb.css">
 
     <!-- JS -->
     <script src="public/libs/angular/angular.min.js"></script>
@@ -21,10 +21,17 @@
 
 <body ng-app="brawnBuilder">
 
-    <div class="container">
+    <div class="container" ng-controller="MainCtrl">
         <div class="jumbotron">
             <h1>Brawn Builder</h1>
         </div>
+
+        <h2 style="text-align: center; margin-top: 200px;">
+            <span class="label label-info" style="padding-top: 10px;">
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</span>
+        </h2>
+
+        <!--rows are added here for each movement-->
     </div>
 
 </body>
