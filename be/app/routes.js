@@ -1,6 +1,13 @@
 
 module.exports = function(app, passport) {
 
+    app.get('/initialLoad', function(req, res) {
+        res.send({
+            test: 1,
+            fuck: 'abab'
+        });
+    });
+
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -20,7 +27,7 @@ module.exports = function(app, passport) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
+        successRedirect : '/home', // redirect to the secure home section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
@@ -37,17 +44,17 @@ module.exports = function(app, passport) {
 
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/profile',
+        successRedirect: '/home',
         failureRedirect: '/signup',
         failureFlash: true
     }));
 
     // =====================================
-    // PROFILE SECTION =====================
+    // Home Page =====================
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile', isLoggedIn, function(req, res) {
+    app.get('/home', isLoggedIn, function(req, res) {
         res.sendfile('index.html');
     });
 
