@@ -1,4 +1,1 @@
-be/node_modules/**
-*.iml
-ui/public/libs/**
 .idea/*
