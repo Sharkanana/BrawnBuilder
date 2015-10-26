@@ -10,10 +10,13 @@
     <!-- CSS -->
     <link rel="stylesheet" href="public/libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/bb.css">
+    <link rel="stylesheet" href="public/libs/angular-chart.js/dist/angular-chart.css">
 
     <!-- JS -->
     <script src="public/libs/angular/angular.min.js"></script>
     <script src="public/libs/angular-route/angular-route.min.js"></script>
+    <script src="public/libs/Chart.js/Chart.js"></script>
+    <script src="public/libs/angular-chart.js/dist/angular-chart.js"></script>
 
     <!-- ANGULAR CUSTOM -->
     <script src="public/js/app.js"></script>
@@ -32,13 +35,15 @@
         </h2>
 
         <!--rows are added here for each movement-->
-        <div ng-repeat="movement in movements" class="row">
-            <div class="col-sm-4">
+        <div ng-repeat="movement in movements" class="row extra-space">
+            <div class="col-sm-1">
                 <h3>{{movement.name}}</h3><br/>
-                <img src="public/img/{{movement.icon}}"/>
+                <img ng-src="public/img/{{movement.icon}}"/>
             </div>
             <div class="col-md-4">
-                <!--chart goes here-->
+                <canvas id="line" class="chart chart-line" chart-data="movement.data"
+                        chart-labels="movement.labels" chart-legend="false" chart-series="movement.series">
+                </canvas>
             </div>
             <div class="col-md-4">
                 <!--add form goes here-->
