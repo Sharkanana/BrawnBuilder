@@ -1,12 +1,10 @@
 
+/**
+ * main routes for the app, login and such
+ * @param app
+ * @param passport
+ */
 module.exports = function(app, passport) {
-
-    app.get('/initialLoad', function(req, res) {
-        res.send({
-            test: 1,
-            fuck: 'abab'
-        });
-    });
 
     // =====================================
     // HOME PAGE (with login links) ========

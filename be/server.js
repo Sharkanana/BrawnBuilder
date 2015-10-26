@@ -62,6 +62,7 @@ app.set('view engine', 'ejs');
 
 // routes ==================================================
 require('./app/routes')(app, passport); // configure our routes
+require('./app/ajaxRoutes')(app); // configure ajax routes
 
 // start app ===============================================
 // startup our app at http://localhost:8080
