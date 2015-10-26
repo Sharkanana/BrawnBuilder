@@ -26,12 +26,24 @@
             <h1>Brawn Builder</h1>
         </div>
 
-        <h2 style="text-align: center; margin-top: 200px;">
+        <h2 style="text-align: center; margin-top: 200px;" ng-hide="!isLoading">
             <span class="label label-info" style="padding-top: 10px;">
                 <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</span>
         </h2>
 
         <!--rows are added here for each movement-->
+        <div ng-repeat="movement in movements" class="row">
+            <div class="col-sm-4">
+                <h3>{{movement.name}}</h3><br/>
+                <img src="public/img/{{movement.icon}}"/>
+            </div>
+            <div class="col-md-4">
+                <!--chart goes here-->
+            </div>
+            <div class="col-md-4">
+                <!--add form goes here-->
+            </div>
+        </div>
     </div>
 
 </body>
