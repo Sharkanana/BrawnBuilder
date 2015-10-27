@@ -24,32 +24,58 @@
 
 <body ng-app="brawnBuilder">
 
-    <div class="container" ng-controller="MainCtrl">
-        <div class="jumbotron">
-            <h1>Brawn Builder</h1>
-        </div>
+<div class="container" ng-controller="MainCtrl">
+    <div class="jumbotron">
+        <h1>Brawn Builder</h1>
+    </div>
 
-        <h2 style="text-align: center; margin-top: 200px;" ng-hide="!isLoading">
+    <h2 style="text-align: center; margin-top: 200px;" ng-hide="!isLoading">
             <span class="label label-info" style="padding-top: 10px;">
                 <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</span>
-        </h2>
+    </h2>
 
-        <!--rows are added here for each movement-->
-        <div ng-repeat="movement in movements" class="row extra-space">
-            <div class="col-sm-1">
-                <h3>{{movement.name}}</h3><br/>
-                <img ng-src="public/img/{{movement.icon}}"/>
-            </div>
-            <div class="col-md-4">
-                <canvas id="line" class="chart chart-line" chart-data="movement.data"
-                        chart-labels="movement.labels" chart-legend="false" chart-series="movement.series">
-                </canvas>
-            </div>
-            <div class="col-md-4">
-                <!--add form goes here-->
-            </div>
+    <!--rows are added here for each movement-->
+    <div ng-repeat="movement in movements" class="row extra-space">
+        <div class="col-sm-1">
+            <h3>{{movement.name}}</h3><br/>
+            <img ng-src="public/img/{{movement.icon}}"/>
+        </div>
+        <div class="col-md-4">
+            <canvas id="line" class="chart chart-line" chart-data="movement.data"
+                    chart-labels="movement.labels" chart-legend="false" chart-series="movement.series">
+            </canvas>
+        </div>
+        <div class="col-md-4">
+            <form role="form">
+                <div class="form-group">
+                    <label for="{{movement.name}}-date" class="form-label">Date</label>
+                    <input id="{{movement.name}}-date" type="date" ng-model="dates[movement.name]" name="date"><br/>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{movement.name}}-weight" class="form-label">Weight</label>
+                    <input id="{{movement.name}}-weight" type="number" ng-model="weights[movement.name]" name="weight"><br/>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{movement.name}}-reps" class="form-label">Reps</label>
+                    <input id="{{movement.name}}-reps" type="number" ng-model="reps[movement.name]" name="reps"><br/>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label class="form-label">1RM</label>
+                            <strong>{{calculateMax(movement.name)}}</strong>
+                        </div>
+                        <button type="submit" class="btn btn-default">Add</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
+</div>
 
 </body>
 

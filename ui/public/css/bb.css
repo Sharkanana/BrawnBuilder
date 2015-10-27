@@ -22,3 +22,7 @@
 .extra-space {
     margin-bottom: 15px;
 }
+
+.form-label {
+    width: 60px;
+}
