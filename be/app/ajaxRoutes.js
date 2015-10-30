@@ -4,33 +4,23 @@
  * @param app
  */
 
-var Movement = require('../app/models/movement'),
-    Log = require('../app/models/log');
+var LogService = require('./service/logService')();
 
 module.exports = function(app) {
 
     app.get('/initialLoad', function(req, res) {
-        Log.find({user: Movement.db.base.Schema.ObjectId(req._passport.session.user)}).exec(function(err, logs) {
+        LogService.initialLoad(req._passport.session.user, res);
+    });
 
-            Movement.find({}).exec(function(err, movements) {
-                var data = [];
+    app.post('/addLog', function(req, res) {
+        var reqData = req.body,
+            userId = req._passport.session.user,
+            movementId = reqData.movement,
+            newEntry = {
+                date: reqData.date,
+                value: reqData.max
+            };
 
-                for(var i = 0; i < movements.length; i++) {
-                    var movement = movements[i];
-
-                    //todo: look through logs to find data points and labels
-
-                    data.push({
-                        name: movement.name,
-                        icon: movement.icon,
-                        labels: ['Jan 2011', '', '', '', '', '', 'Oct 2015'],
-                        series: [''],
-                        data: [[10, 20, 30, 35, 50, 60, 70]]
-                    });
-                }
-
-                res.send(data);
-            });
-        });
+        LogService.addLog(userId, movementId, newEntry, res);
     });
 };

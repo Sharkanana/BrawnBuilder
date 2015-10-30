@@ -3,7 +3,7 @@
 
     var app = angular.module('brawnBuilder', ['chart.js']);
 
-    app.controller('MainCtrl', function ($scope, $http) {
+    app.controller('MainCtrl', function ($scope, $http, $filter) {
 
         $scope.isLoading = true;
 
@@ -24,7 +24,22 @@
         });
 
         $scope.addLog = function(movement) {
-            console.log(movement);
+            var mObject = findMovement($scope, movement),
+                data = {
+                    movement: mObject.id,
+                    max: $scope.calculateMax(movement),
+                    date: $scope.dates[movement]
+                };
+
+            $http.post('addLog', data).success(function(response) {
+                if(response) {
+                    mObject.data[0].push(data.max);
+                    mObject.labels.push($filter('date')(data.date, 'MM/dd/yyyy'));
+                }
+                else {
+                    alert('Error adding log!');
+                }
+            });
         };
 
         $scope.canAdd = function(movement) {
@@ -42,4 +57,13 @@
             return Math.round(weight * (1+(reps/30)));
         };
     });
+
+    function findMovement(scope, movement) {
+        for(var i = 0; i < scope.movements.length; i++) {
+            if(scope.movements[i].name === movement)
+                return scope.movements[i];
+        }
+
+        return null;
+    }
 })();
