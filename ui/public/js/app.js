@@ -3,7 +3,7 @@
 
     var app = angular.module('brawnBuilder', ['chart.js']);
 
-    app.controller('MainCtrl', function ($scope, $http, $filter) {
+    app.controller('MainCtrl', function ($scope, $http) {
 
         $scope.isLoading = true;
 
@@ -42,6 +42,27 @@
             });
         };
 
+        $scope.deletePoint = function(points, evt) {
+            var point = points[0],
+                movementId = evt.currentTarget.id.substring(5);
+
+            $http.post('deleteLog', {
+                movement: movementId,
+                date: point.label,
+                value: point.value
+            }).success(function(response) {
+                if(response) {
+                    var mObj = findMovement($scope, movementId);
+
+                    mObj.data[0] = response.data;
+                    mObj.labels = response.labels;
+                }
+                else {
+                    alert('Error deleting log!');
+                }
+            });
+        };
+
         $scope.canAdd = function(movement) {
             return $scope.dates[movement] && $scope.weights[movement] && $scope.reps[movement];
         };
@@ -60,7 +81,7 @@
 
     function findMovement(scope, movement) {
         for(var i = 0; i < scope.movements.length; i++) {
-            if(scope.movements[i].name === movement)
+            if(scope.movements[i].name === movement || scope.movements[i].id === movement)
                 return scope.movements[i];
         }
 

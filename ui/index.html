@@ -41,7 +41,7 @@
             <img ng-src="public/img/{{movement.icon}}"/>
         </div>
         <div class="col-md-4">
-            <canvas id="line" class="chart chart-line" chart-data="movement.data"
+            <canvas id="line-{{movement.id}}" class="chart chart-line" chart-data="movement.data" chart-click="deletePoint"
                     chart-labels="movement.labels" chart-legend="false" chart-series="movement.series">
             </canvas>
         </div>

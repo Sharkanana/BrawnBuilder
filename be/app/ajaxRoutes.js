@@ -23,4 +23,8 @@ module.exports = function(app) {
 
         LogService.addLog(userId, movementId, newEntry, res);
     });
+
+    app.post('/deleteLog', function(req, res) {
+        LogService.deleteLog(req._passport.session.user, req.body, res);
+    });
 };

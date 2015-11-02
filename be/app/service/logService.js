@@ -105,6 +105,38 @@ module.exports = function() {
             });
         },
 
+        deleteLog: function(userId, dto, res) {
+            var me = this;
+
+            Log.findOne({
+                user: userId,
+                movement: dto.movement
+            }).exec(function (err, log) {
+                //if found, insert new Entry
+                if (log) {
+
+                    for(var i = 0; i < log.entries.length; i++) {
+                        var entry = log.entries[i];
+
+                        if(entry.date.substring(0,10) === dto.date && entry.value === dto.value) {
+                            log.entries.splice(i, 1);
+                            break;
+                        }
+                    }
+
+                    log.save(function(err, result) {
+                        if(err)
+                            res.send(false);
+                        else
+                            res.send(me.entriesForUI(result.entries))
+                    })
+
+                } else {
+                    res.send(false);
+                }
+            });
+        },
+
         /**private functions**/
         entriesForUI: function(entries) {
             var result = {
