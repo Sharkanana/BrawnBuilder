@@ -33,8 +33,8 @@
 
             $http.post('addLog', data).success(function(response) {
                 if(response) {
-                    mObject.data[0].push(data.max);
-                    mObject.labels.push($filter('date')(data.date, 'MM/dd/yyyy'));
+                    mObject.data[0] = response.data;
+                    mObject.labels = response.labels;
                 }
                 else {
                     alert('Error adding log!');
