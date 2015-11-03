@@ -38,9 +38,9 @@ module.exports = function() {
                             id: movement._id,
                             name: movement.name,
                             icon: movement.icon,
-                            labels: entriesForUI.labels,
+                            labels: entriesForUI.labels || ['Please add an entry.'],
                             series: [''],
-                            data: [entriesForUI.data]
+                            data: [entriesForUI.data || [0]]
                         });
                     }
 
